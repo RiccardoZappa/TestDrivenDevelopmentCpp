@@ -81,13 +81,22 @@ private:
 
 	void EncodeTail(std::string& encoding, const std::string& word) const
 	{
-		for (auto letter : tail(word))
+		for (auto i = 1u; i < word.length(); i++)
 		{
-			if (isComplete(encoding)) break;
-
-			auto digit = EncodedDigit(letter);
-			if (digit != NotADigit && digit != LastDigit(encoding))
-				encoding += digit;
+			if (!isComplete(encoding))
+				EncodeLetter(encoding, word[i], word[i - 1]);
 		}
+	}
+
+	void EncodeLetter(std::string& encoding, char letter, char lastLetter) const
+	{
+		auto digit = EncodedDigit(letter);
+		if (digit != NotADigit && (digit != LastDigit(encoding) || isVowel(lastLetter)))
+			encoding += digit;
+	}
+
+	bool isVowel(char letter) const
+	{
+		return std::string("aeiouy").find(Lower(letter)) != std::string::npos;
 	}
 };
