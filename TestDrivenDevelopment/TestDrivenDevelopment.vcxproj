@@ -98,6 +98,8 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Source\Soundex.h" />
+    <ClInclude Include="Utils\CharUtil.h" />
+    <ClInclude Include="Utils\StringUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

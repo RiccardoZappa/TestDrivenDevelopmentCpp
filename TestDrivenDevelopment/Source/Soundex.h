@@ -2,12 +2,17 @@
 #include <string>
 #include <unordered_map>
 
-static const size_t MaxWordLength{ 4 };
-const std::string NotADigit{ '*' };
+#include "..\Utils\CharUtil.h"
+#include "..\Utils\StringUtil.h"
+
+using namespace Utils::CharUtil;
+using namespace Utils::StringUtil;
 
 class Soundex
 {
 public:
+	static const size_t MaxWordLength{ 4 };
+
 	std::string encode(const std::string& word) const
 	{
 		return ZeroPad(UpperFront(Head(word)) + tail(EncodedDigits(word)));
@@ -28,15 +33,7 @@ public:
 		return it == encodings.end() ? NotADigit : it->second;
 	}
 private:
-	std::string Head(const std::string& word) const
-	{
-		return word.substr(0, 1);
-	}
-
-	std::string tail(const std::string& word) const 
-	{
-		return word.substr(1);
-	}
+	const std::string NotADigit{ '*' };
 
 	std::string EncodedDigits(const std::string& word) const
 	{
@@ -47,12 +44,6 @@ private:
 	
 	}
 
-	std::string ZeroPad(const std::string& word) const
-	{
-		auto ZerosNeeded = MaxWordLength - word.length();
-		return word + std::string(ZerosNeeded, '0');
-	}
-	
 	bool isComplete(const std::string& encoding) const
 	{
 		return encoding.length() == MaxWordLength;
@@ -62,16 +53,6 @@ private:
 	{
 		if (encoding.empty()) return NotADigit;
 		return std::string(1, encoding.back());
-	}
-
-	std::string UpperFront(const std::string& string) const
-	{
-		return std::string(1, std::toupper(static_cast<unsigned char>(string.front())));
-	}
-
-	char Lower(char c) const
-	{
-		return std::tolower(static_cast<unsigned char>(c));
 	}
 
 	void EncodeHead(std::string& encoding, const std::string& word) const
@@ -93,10 +74,5 @@ private:
 		auto digit = EncodedDigit(letter);
 		if (digit != NotADigit && (digit != LastDigit(encoding) || isVowel(lastLetter)))
 			encoding += digit;
-	}
-
-	bool isVowel(char letter) const
-	{
-		return std::string("aeiouy").find(Lower(letter)) != std::string::npos;
 	}
 };

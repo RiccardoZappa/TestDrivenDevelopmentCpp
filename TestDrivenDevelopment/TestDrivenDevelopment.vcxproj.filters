@@ -16,6 +16,12 @@
     <ClInclude Include="Source\Soundex.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\CharUtil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\StringUtil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -26,6 +32,9 @@
     </Filter>
     <Filter Include="Tests">
       <UniqueIdentifier>{8aa2a46a-dc2b-447d-852a-fb7c60d01097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{a0b60132-519d-4247-9aab-0f6af49c1689}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
